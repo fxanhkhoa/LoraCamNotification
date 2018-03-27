@@ -25,15 +25,22 @@ namespace LoraCamNotification
         }
         private string readFromLink()
         {
-            System.Net.WebClient client = new System.Net.WebClient();
-            byte[] data = client.DownloadData(url);
-            string html = System.Text.Encoding.UTF8.GetString(data);
+            string html = "";
+            try
+            {
+                System.Net.WebClient client = new System.Net.WebClient();
+                byte[] data = client.DownloadData(url);
+                html = System.Text.Encoding.UTF8.GetString(data);
 
-            XmlReader reader = XmlReader.Create(new StringReader(html));
-            //Parse html to xml
-            doc.LoadXml(html);
-            
-                return html;
+                XmlReader reader = XmlReader.Create(new StringReader(html));
+                //Parse html to xml
+                doc.LoadXml(html);
+            }
+            catch
+            {
+
+            }
+            return html;
         }
 
         public string GetContent()
@@ -44,45 +51,49 @@ namespace LoraCamNotification
 
         public void ProcessContent()
         {
-            GetContent();
-            XmlNodeList elemList = doc.GetElementsByTagName("active");
-            SetAllZero();
-            int index = Convert.ToInt16(elemList[0].InnerText);
-            switch (index)
+            try
             {
-                case 1:
-                    cam1 = 1;
-                    break;
-                case 2:
-                    cam2 = 1;
-                    break;
-                case 3:
-                    cam3 = 1;
-                    break;
-                case 4:
-                    cam4 = 1;
-                    break;
-            }
+                GetContent();
+                XmlNodeList elemList = doc.GetElementsByTagName("active");
+                SetAllZero();
+                int index = Convert.ToInt16(elemList[0].InnerText);
+                switch (index)
+                {
+                    case 1:
+                        cam1 = 1;
+                        break;
+                    case 2:
+                        cam2 = 1;
+                        break;
+                    case 3:
+                        cam3 = 1;
+                        break;
+                    case 4:
+                        cam4 = 1;
+                        break;
+                }
 
-            elemList = doc.GetElementsByTagName("preview");
-            index = Convert.ToInt16(elemList[0].InnerText);
-            switch (index)
+                elemList = doc.GetElementsByTagName("preview");
+                index = Convert.ToInt16(elemList[0].InnerText);
+                switch (index)
+                {
+                    case 1:
+                        cam1 = 2;
+                        break;
+                    case 2:
+                        cam2 = 2;
+                        break;
+                    case 3:
+                        cam3 = 2;
+                        break;
+                    case 4:
+                        cam4 = 2;
+                        break;
+                }
+            }
+            catch
             {
-                case 1:
-                    cam1 = 2;
-                    break;
-                case 2:
-                    cam2 = 2;
-                    break;
-                case 3:
-                    cam3 = 2;
-                    break;
-                case 4:
-                    cam4 = 2;
-                    break;
             }
-
-           
         }
 
         public int GetCamStatus(int index)
@@ -92,11 +103,11 @@ namespace LoraCamNotification
                 case 1:
                     return cam1;
                 case 2:
-                    return cam2;                    
+                    return cam2;
                 case 3:
-                    return cam3;                    
+                    return cam3;
                 case 4:
-                    return cam4;                   
+                    return cam4;
             }
             return 0;
         }

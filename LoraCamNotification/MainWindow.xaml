@@ -55,9 +55,7 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Horizontal">
                 <Label>Address:</Label>
-                <TextBox Width="200px" Name="Address" Opacity="0.5">http://192.168.80.1:8088</TextBox>
-                <Label>Port:</Label>
-                <TextBox Width="50px" Name="Port" Opacity="0.5"></TextBox>
+                <TextBox Width="200px" Name="Address" Opacity="0.5"></TextBox>
                 <Button Margin="2" Name="Address_Connect_Btn" Click="Address_Connect_Btn_Click">Connect</Button>
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Orientation="Horizontal">

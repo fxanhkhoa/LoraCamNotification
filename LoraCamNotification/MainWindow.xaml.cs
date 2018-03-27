@@ -46,6 +46,7 @@ namespace LoraCamNotification
         public MainWindow()
         {
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
