@@ -12,6 +12,13 @@ namespace LoraCamNotification
         private static Boolean _OK = false;
         private static Boolean _DataOK = false;
         private static Controller _Control;
+        private static int _ByteToSend;
+
+        public static int ByteToSend
+        {
+            get { return _ByteToSend; }
+            set { _ByteToSend = value; }
+        }
 
         public static Controller Control
         {

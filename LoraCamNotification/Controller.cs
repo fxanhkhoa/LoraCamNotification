@@ -57,7 +57,9 @@ namespace LoraCamNotification
                 XmlNodeList elemList = doc.GetElementsByTagName("active");
                 SetAllZero();
                 int index = Convert.ToInt16(elemList[0].InnerText);
-                switch (index)
+                GlobalVar.ByteToSend = 0x00; // Reset byte to send
+                GlobalVar.ByteToSend |= (1 << (index - 1));
+                switch (index) // Check Active Status
                 {
                     case 1:
                         cam1 = 1;
@@ -75,6 +77,7 @@ namespace LoraCamNotification
 
                 elemList = doc.GetElementsByTagName("preview");
                 index = Convert.ToInt16(elemList[0].InnerText);
+                GlobalVar.ByteToSend |= (1 << (index + 3));
                 switch (index)
                 {
                     case 1:
@@ -90,6 +93,11 @@ namespace LoraCamNotification
                         cam4 = 2;
                         break;
                 }
+                char send = (char)GlobalVar.ByteToSend;
+                GlobalVar.Serial_Data.SendData((Convert.ToChar(GlobalVar.ByteToSend)).ToString());
+                //MessageBox.Show(send.ToString());
+                //MessageBox.Show(GlobalVar.ByteToSend.ToString());
+                //GlobalVar.Serial_Data.SendData("*");
             }
             catch
             {

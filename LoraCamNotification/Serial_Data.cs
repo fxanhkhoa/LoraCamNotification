@@ -78,7 +78,7 @@ namespace LoraCamNotification
                 if (!_Sp.IsOpen)
                 {
                     _Sp.PortName = ComName;
-                    _Sp.BaudRate = Convert.ToInt16(Baud);
+                    _Sp.BaudRate = Convert.ToInt32(Baud);
                     _Sp.DataBits = Convert.ToInt16(Databits);
 
                     if (Parity == "None") _Sp.Parity = System.IO.Ports.Parity.None;
